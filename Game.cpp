@@ -7,6 +7,9 @@ GameObject* board;
 GameObject* x;
 GameObject* o;
 
+SDL_Renderer* Game::renderer = nullptr;
+SDL_Event Game::event;
+
 Game::Game()
 {
 }
@@ -50,18 +53,40 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 }
 
 void Game::handleEvents() {
-	SDL_Event event; //look for the event
+
 	SDL_PollEvent(&event); //get the event
 
 	switch (event.type) {
 		case SDL_QUIT://if the X is pressed then end the game
 			isRunning = false;
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			int x, y;
+			//SDL_MouseButtonEvent b = event.button;
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				SDL_GetMouseState(&x, &y);
+				//std::cout << x << std::endl;
 
+				int ID = x / 200;
+				ID = ID + ((y / 200) * 3);
+
+				if (Grid[ID] != GRID_TYPE_NONE) {
+					return;
+				}
+				if (currentPlayer == 0) {
+					setCell(ID, GRID_TYPE_X);
+					currentPlayer = 1;
+				}
+				else {
+					setCell(ID, GRID_TYPE_O);
+					currentPlayer = 0;
+				}
+			}
 		default:
 			break;
-
 	}
+
+
 
 
 }

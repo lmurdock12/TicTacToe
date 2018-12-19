@@ -18,6 +18,8 @@ public:
 
 
 	bool running() { return isRunning; }
+	static SDL_Event event;
+	static SDL_Renderer *renderer;
 
 private:
 	int Grid[9];
@@ -27,9 +29,9 @@ private:
 		GRID_TYPE_O
 	};
 
+	int currentPlayer;
 	bool isRunning;
 	SDL_Window *window;
-	SDL_Renderer *renderer;
 
 };
 
