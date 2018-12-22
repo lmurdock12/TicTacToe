@@ -30,7 +30,6 @@ int main(int argc, char*argv[]) {
 	}
 	game->clean(); //if game done running then clean everything.
 
-
 	return 0;
 
 }
